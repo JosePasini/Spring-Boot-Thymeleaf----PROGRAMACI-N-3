@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>X X X X X   Página de Error  X X X X X</title>
+    <title>Detalles del videojuego</title>
 </head>
 <body>
 
@@ -29,21 +29,16 @@
         </div>
     </nav>
 
-
-    <!-- ¡ WARNING ! Mensaje de error -->
-    <div class = "container">
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-danger mt-5" role="alert" th:if="${error}">
-                    <span th:text="${error}">Error.</span>
+    <div class="container">
+        <div class="row mt-5" th:object="${videojuego}">
+            <div class="col-4"></div>
+                <img th:src="*{ruta_img}" alt="" class="img-fluid">
+            <div class="col-8"></div>
+                <div class="card">
+                    <p th:text="*{descripcion}"></p>
                 </div>
-                <div class="alert alert-danger mt-5" role="alert" th:unless="${error}">
-                    Al parecer hubo un error.
-                </div>
-            </div>
         </div>
     </div>
-
 
 </body>
 </html>
