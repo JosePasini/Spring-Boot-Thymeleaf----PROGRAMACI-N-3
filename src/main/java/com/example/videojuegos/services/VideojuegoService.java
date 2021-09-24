@@ -4,11 +4,13 @@ import com.example.videojuegos.entities.Estudio;
 import com.example.videojuegos.entities.Videojuego;
 import com.example.videojuegos.repositories.VideojuegoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class VideojuegoService implements BaseService<Videojuego> {
 
     @Autowired
@@ -18,8 +20,8 @@ public class VideojuegoService implements BaseService<Videojuego> {
     @Transactional
     public List<Videojuego> findAll() throws Exception {
         try {
-            List<Videojuego> entity = this.videojuegoRepository.findAll();
-            return entity;
+            List<Videojuego> entities = this.videojuegoRepository.findAll();
+            return entities;
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -30,8 +32,7 @@ public class VideojuegoService implements BaseService<Videojuego> {
     public Videojuego findById(Long id) throws Exception {
         try {
             Optional<Videojuego> optionalVideojuego = this.videojuegoRepository.findById(id);
-            Videojuego videojuego = optionalVideojuego.get();
-            return videojuego;
+            return optionalVideojuego.get();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -71,15 +72,32 @@ public class VideojuegoService implements BaseService<Videojuego> {
     public Videojuego updateOne(Videojuego entity, Long id) throws Exception {
         try{
             Optional<Videojuego> estudioVideojuego = this.videojuegoRepository.findById(id);
-            if (!estudioVideojuego.isEmpty()){
                 Videojuego videojuego = estudioVideojuego.get();
                 videojuego = this.videojuegoRepository.save(entity);
                 return videojuego;
-            } else{
-                throw new Exception();
-            }
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
+
+    @Transactional
+    public Videojuego findByIdAndActivo(Long id) throws Exception{
+        try{
+            Optional<Videojuego> optionalVideojuego = this.videojuegoRepository.findByIdAndActivo(id);
+            return optionalVideojuego.get();
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public List<Videojuego> findAllByActivo() throws Exception{
+        try{
+            List<Videojuego> videojuegoList = this.videojuegoRepository.findAllByActivo();
+            return videojuegoList;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }

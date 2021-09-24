@@ -72,13 +72,9 @@ public class EstudioService implements BaseService<Estudio> {
     public Estudio updateOne(Estudio entity, Long id) throws Exception {
         try{
             Optional<Estudio> estudioOptional = this.estudioRepository.findById(id);
-            if (!estudioOptional.isEmpty()){
                 Estudio estudio = estudioOptional.get();
                 estudio = this.estudioRepository.save(entity);
                 return estudio;
-            } else{
-                throw new Exception();
-            }
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

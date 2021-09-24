@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "videojuego")
+@Table(name = "videojuegos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,12 +34,12 @@ public class Videojuego extends BaseEntity{
 
     // Relaciones
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_categoria")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_categoria", nullable = false)
     private Categoria categoria;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fk_estudio")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_estudio", nullable = false)
     private Estudio estudio;
 
 

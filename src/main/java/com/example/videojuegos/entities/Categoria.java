@@ -26,6 +26,6 @@ public class Categoria extends BaseEntity{
     // Relaciones
 
     @OneToMany(mappedBy = "categoria")
-    private List<Videojuego> videojuegoList_categoria = new ArrayList<>();
+    private List<Videojuego> videojuegoList_categoria;
 
 }

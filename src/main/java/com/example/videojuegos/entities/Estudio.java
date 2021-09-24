@@ -25,6 +25,6 @@ public class Estudio extends BaseEntity{
     // Relaciones
 
     @OneToMany(mappedBy = "estudio")
-    private List<Videojuego> videojuegoList_estudio = new ArrayList<>();
+    private List<Videojuego> videojuegoList_estudio;
 
 }
