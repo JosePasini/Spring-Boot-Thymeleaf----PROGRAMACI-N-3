@@ -1,8 +1,6 @@
 package com.example.videojuegos.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -36,10 +34,12 @@ public class Videojuego extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_categoria", nullable = false)
+    @ToString.Exclude
     private Categoria categoria;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_estudio", nullable = false)
+    @ToString.Exclude
     private Estudio estudio;
 
 

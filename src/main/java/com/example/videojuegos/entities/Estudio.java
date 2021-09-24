@@ -1,8 +1,7 @@
 package com.example.videojuegos.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +24,8 @@ public class Estudio extends BaseEntity{
     // Relaciones
 
     @OneToMany(mappedBy = "estudio")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Videojuego> videojuegoList_estudio;
 
 }

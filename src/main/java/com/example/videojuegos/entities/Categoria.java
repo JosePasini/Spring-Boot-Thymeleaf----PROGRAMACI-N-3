@@ -1,8 +1,8 @@
 package com.example.videojuegos.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import net.bytebuddy.build.ToStringPlugin;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,9 +23,11 @@ public class Categoria extends BaseEntity{
     @Column(name = "activo")
     private boolean activo;
 
+
     // Relaciones
 
     @OneToMany(mappedBy = "categoria")
+    @ToString.Exclude
     private List<Videojuego> videojuegoList_categoria;
 
 }
