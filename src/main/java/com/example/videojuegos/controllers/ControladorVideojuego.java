@@ -5,9 +5,12 @@ import com.example.videojuegos.services.VideojuegoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -41,4 +44,18 @@ public class ControladorVideojuego {
             return "error";
         }
     }
+
+    @PostMapping(value = "/busqueda")
+    public String busquedaVideojuego(Model model, @RequestParam(value = "query", required = false) String q){
+        try{
+            List<Videojuego> videojuegoList = this.videojuegoService.findByTitulo(q);
+            model.addAttribute("videojuegos", videojuegoList);
+            return "views/busqueda";
+        } catch (Exception e){
+            model.addAttribute("error", "ERROR ERROR ERROR");
+            return "error";
+        }
+    }
+
+
 }

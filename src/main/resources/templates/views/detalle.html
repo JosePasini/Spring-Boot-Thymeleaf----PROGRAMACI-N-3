@@ -7,27 +7,8 @@
 </head>
 <body>
 
-    <!-- CONTENEDOR DEL NAV-BAR-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/inicio}">UTN-videojuegos-PROG 3</a>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/inicio}">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/crud}">CRUD</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    <!-- FRAGMENTO DEL NAVBAR-->
+    <nav th:replace="components/navbar :: nav_bar"></nav>
 
     <div class="container">
         <div class="row mt-5" th:object="${videojuego}">
@@ -35,8 +16,26 @@
                 <img th:src="*{ruta_img}" alt="" class="img-fluid">
             <div class="col-8"></div>
                 <div class="card">
-                    <p th:text="*{descripcion}"></p>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="*{titulo}">Título</h5>
+                        <p class="card-text"><b>Precio:</b>  <span th:text="*{precio}"></span></p>
+                        <p class="card-text" th:if="*{cantidad}">
+                            <b>Cantidad: </b> <span th:text="*{cantidad}"></span>
+                        </p>
+                        <p class="card-text" th:unless="*{cantidad}">
+                            <span class="text-danger">Sin Stock</span>
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <p class="card-text" th:text="*{descripcion}">/p>
+                    </div>
                 </div>
+            
+            <div class="col-12" mt-5>
+                <a th:href="@{/inicio}" class = "btn btn-outline-dark">Volver</a>
+            </div>
+
         </div>
     </div>
 

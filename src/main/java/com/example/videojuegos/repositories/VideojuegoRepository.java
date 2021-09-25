@@ -16,4 +16,7 @@ public interface VideojuegoRepository extends BaseRepository<Videojuego, Long> {
     @Query(value = "SELECT * FROM videojuegos WHERE videojuegos.id = :id AND videojuegos.activo = true", nativeQuery = true)
     Optional<Videojuego> findByIdAndActivo(@Param("id") Long id);
 
+    @Query(value = "SELECT * FROM videojuegos WHERE videojuegos.titulo LIKE %:q% AND videojuegos.activo = true", nativeQuery = true)
+    List<Videojuego> findByTitulo(@Param("q") String q);
+
 }
