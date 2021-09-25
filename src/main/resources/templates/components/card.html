@@ -1,6 +1,6 @@
 <!-- FRAGMENTO DE LAS CARTAS -->
 
-<div th:fragment="_card" class="card" th:each="videojuego : ${lista_videojuegos}">
+<div th:fragment="_card" class="card" th:each="videojuego : ${videojuegos}">
   <img th:src="${videojuego.ruta_img}" class="card-img-top" alt="Imagen videojuego">
   <div class="card-body">
     <h5 class="card-title" th:text="${videojuego.titulo}">Título</h5>

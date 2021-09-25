@@ -25,7 +25,7 @@ public class ControladorVideojuego {
     public String inicio(Model model){
         try{
             List<Videojuego> videojuegoList = this.videojuegoService.findAllByActivo();
-            model.addAttribute("lista_videojuegos", videojuegoList);
+            model.addAttribute("videojuegos", videojuegoList);
             return "views/inicio";
         } catch (Exception e){
             model.addAttribute("error", e.getMessage());
@@ -37,7 +37,7 @@ public class ControladorVideojuego {
     public String detalleVideojuego(Model model, @PathVariable("id") Long id) throws Exception {
         try {
             Videojuego videojuego = this.videojuegoService.findById(id);
-            model.addAttribute("videojuego", videojuego);
+            model.addAttribute("videojuegos", videojuego);
             return "views/detalle";
         }catch (Exception e){
             model.addAttribute("error", e.getMessage());
@@ -45,7 +45,7 @@ public class ControladorVideojuego {
         }
     }
 
-    @PostMapping(value = "/busqueda")
+    @GetMapping(value = "/busqueda")
     public String busquedaVideojuego(Model model, @RequestParam(value = "query", required = false) String q){
         try{
             List<Videojuego> videojuegoList = this.videojuegoService.findByTitulo(q);

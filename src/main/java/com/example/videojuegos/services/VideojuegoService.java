@@ -103,6 +103,7 @@ public class VideojuegoService implements BaseService<Videojuego> {
     @Transactional
     public List<Videojuego> findByTitulo(String filtro) throws Exception{
         try{
+
             List<Videojuego> entities = this.videojuegoRepository.findByTitulo(filtro);
             return entities;
         } catch (Exception e){

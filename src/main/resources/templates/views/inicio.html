@@ -15,9 +15,9 @@
             <div class="col-12">
                 <div class = "card-deck mt-5">
 
-                    <!-- Llamando al fragmento de cartas
+                    <!-- Llamando al fragmento de cartas-->
                     <div th:replace="components/card :: _card"></div>
-                    -->
+                    <!--
                     <div class="card" th:each="videojuego : ${lista_videojuegos}">
                         <img th:src="${videojuego.ruta_img}" class="card-img-top" alt="Imagen videojuego">
                         <div class="card-body">
@@ -26,8 +26,7 @@
                             <a th:href="@{detalle/{id}(id=${videojuego.id})}" class="btn btn-primary">Ver detalles</a>
                         </div>
                     </div>
-
-
+                     -->
                 </div>
             </div>
         </div>

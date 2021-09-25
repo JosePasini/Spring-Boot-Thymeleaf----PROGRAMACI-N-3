@@ -9,20 +9,22 @@
     <!-- FRAGMENTO DEL NAVBAR-->
     <nav th:replace="components/navbar :: nav_bar"></nav>
 
+
     <!-- CONTENEDOR DE LAS CARTAS -->
-    <div class="container">
+    <div class="container" >
         <div class="row">
             <div class="col-12">
                 <div class = "card-deck mt-5" th:if="${videojuegos.size}">
                     <h2>Resultados: </h2>
-                    <!-- Llamando al fragmento de cartas -->
                     <div th:replace="components/card :: _card"></div>
                 </div>
-                <div th:unless="${videojuegos.size}"></div>
-                <h2>No hay resultados: </h2>
+                <div th:unless="${videojuegos.size}">
+                <h3>No hay resultados.</h3>
+                </div>
             </div>
         </div>
     </div>
+
 
 
 </body>
