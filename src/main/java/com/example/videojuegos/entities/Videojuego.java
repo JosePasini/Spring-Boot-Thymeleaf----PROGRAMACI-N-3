@@ -1,6 +1,7 @@
 package com.example.videojuegos.entities;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,6 +26,8 @@ public class Videojuego extends BaseEntity{
     private String descripcion;
     @Column(name = "oferta")
     private boolean oferta;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "lanzamiento")
     private Date lanzamiento;
     @Column(name = "activo")
