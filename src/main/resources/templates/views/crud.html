@@ -43,7 +43,7 @@
                     <td th:text="${videojuego.cantidad}"></td>
                     <td>
                         <a th:href="@{/formulario/videojuego/{id}(id=${videojuego.id})}" class="btn btn-warning">Editar</a>
-                        <a th:href="@{/eliminar/videojuego/{id}(id=${videojuego.id})}" class="btn btn-danger">Eliminar</a>
+                        <a th:if="${videojuego.activo}" th:href="@{/eliminar/videojuego/{id}(id=${videojuego.id})}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
                 </tbody>

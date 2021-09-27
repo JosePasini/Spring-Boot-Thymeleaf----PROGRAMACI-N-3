@@ -4,6 +4,7 @@ import com.example.videojuegos.entities.Videojuego;
 import com.example.videojuegos.services.CategoriaService;
 import com.example.videojuegos.services.EstudioService;
 import com.example.videojuegos.services.VideojuegoService;
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,11 +98,35 @@ public class ControladorVideojuego {
     }
 
     @PostMapping ("/formulario/videojuego/{id}")
-    public String guardarVideojuego(@ModelAttribute("videojuegos") Videojuego videojuego, Model model, @PathVariable("id") long id){
+    public String guardarVideojuego(
+            @RequestParam("archivo") MultipartFile archivo,
+            @ModelAttribute("videojuegos") Videojuego videojuego,
+            Model model, @PathVariable("id") long id){
+
         try{
+            // Acá comienza la carga de las imágenes
+            // Luego tengo que eliminar los Souts y dejarlo más limpio
+            // Tembién hay que ver qué ruta dejar.
+            String ruta = "C://Videojuegos/imagenes";
+            int index = archivo.getOriginalFilename().indexOf(".");
+            String extension = "";
+            extension = "."+archivo.getOriginalFilename().substring(index+1);
+            System.out.println("Extension: " + extension);
+            String nombreFoto = Calendar.getInstance().getTimeInMillis() + extension;
+            System.out.println("Nombre Foto: " + nombreFoto);
+            Path rutaAbsoluta = id != 0 ? Paths.get(ruta + "//" + videojuego.getRuta_img()) : Paths.get(ruta + "//"+nombreFoto);
+            System.out.println("Path (ruta absoluta): " + rutaAbsoluta);
             if (id == 0){
+                Files.write(rutaAbsoluta, archivo.getBytes());
+                videojuego.setRuta_img(nombreFoto); // Este sería el original
+                System.out.println(" ************ GetBytes: " + archivo.getBytes());
+                videojuego.setRuta_img(rutaAbsoluta.toString()); // Esto sería lo que inventé yo.
                 this.videojuegoService.saveOne(videojuego);
+
             } else {
+                if (!archivo.isEmpty()){
+                    Files.write(rutaAbsoluta, archivo.getBytes());
+                }
                 this.videojuegoService.updateOne(videojuego,id);
             }
             return "redirect:/crud";
