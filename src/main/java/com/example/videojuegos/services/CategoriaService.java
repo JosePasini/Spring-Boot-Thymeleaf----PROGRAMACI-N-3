@@ -29,7 +29,7 @@ public class CategoriaService implements BaseService<Categoria>{
 
     @Override
     @Transactional
-    public Categoria findById(Long id) throws Exception {
+    public Categoria findById(long id) throws Exception {
 
         // Quizás tenga que sacar el IF.
         try{
@@ -56,7 +56,7 @@ public class CategoriaService implements BaseService<Categoria>{
 
     @Override
     @Transactional
-    public boolean deleteById(Long id) throws Exception {
+    public boolean deleteById(long id) throws Exception {
         try {
             Optional<Categoria> optionalCategoria = this.categoriaRepository.findById(id);
             if (!optionalCategoria.isEmpty()) {
@@ -74,7 +74,7 @@ public class CategoriaService implements BaseService<Categoria>{
 
     @Override
     @Transactional
-    public Categoria updateOne(Categoria entity, Long id) throws Exception {
+    public Categoria updateOne(Categoria entity, long id) throws Exception {
         try{
             Optional<Categoria> optionalCategoria = this.categoriaRepository.findById(id);
             Categoria categoria = optionalCategoria.get();

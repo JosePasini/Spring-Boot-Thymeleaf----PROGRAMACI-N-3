@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import net.bytebuddy.build.ToStringPlugin;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Categoria extends BaseEntity{
+public class Categoria{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "nombre")
     private String nombre;
@@ -25,9 +26,10 @@ public class Categoria extends BaseEntity{
 
 
     // Relaciones
-
+/*
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
     private List<Videojuego> videojuegoList_categoria;
+*/
 
 }

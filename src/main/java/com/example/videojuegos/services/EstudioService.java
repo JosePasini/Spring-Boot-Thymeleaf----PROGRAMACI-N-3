@@ -28,7 +28,7 @@ public class EstudioService implements BaseService<Estudio> {
 
     @Override
     @Transactional
-    public Estudio findById(Long id) throws Exception {
+    public Estudio findById(long id) throws Exception {
         try {
             Optional<Estudio> optionalEstudio = this.estudioRepository.findById(id);
             Estudio estudio = optionalEstudio.get();
@@ -51,7 +51,7 @@ public class EstudioService implements BaseService<Estudio> {
 
     @Override
     @Transactional
-    public boolean deleteById(Long id) throws Exception {
+    public boolean deleteById(long id) throws Exception {
         try {
             Optional<Estudio> estudioOptional = this.estudioRepository.findById(id);
             if (!estudioOptional.isEmpty()) {
@@ -69,7 +69,7 @@ public class EstudioService implements BaseService<Estudio> {
 
     @Override
     @Transactional
-    public Estudio updateOne(Estudio entity, Long id) throws Exception {
+    public Estudio updateOne(Estudio entity, long id) throws Exception {
         try{
             Optional<Estudio> estudioOptional = this.estudioRepository.findById(id);
                 Estudio estudio = estudioOptional.get();

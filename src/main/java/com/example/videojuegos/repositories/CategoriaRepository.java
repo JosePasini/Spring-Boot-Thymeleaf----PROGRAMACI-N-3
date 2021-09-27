@@ -1,8 +1,9 @@
 package com.example.videojuegos.repositories;
 
 import com.example.videojuegos.entities.Categoria;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoriaRepository extends BaseRepository<Categoria, Long> {
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 }

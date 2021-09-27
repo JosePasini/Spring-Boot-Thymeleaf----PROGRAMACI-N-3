@@ -29,7 +29,7 @@ public class VideojuegoService implements BaseService<Videojuego> {
 
     @Override
     @Transactional
-    public Videojuego findById(Long id) throws Exception {
+    public Videojuego findById(long id) throws Exception {
         try {
             Optional<Videojuego> optionalVideojuego = this.videojuegoRepository.findById(id);
             return optionalVideojuego.get();
@@ -51,7 +51,7 @@ public class VideojuegoService implements BaseService<Videojuego> {
 
     @Override
     @Transactional
-    public boolean deleteById(Long id) throws Exception {
+    public boolean deleteById(long id) throws Exception {
         try {
             Optional<Videojuego> estudioVideojuego = this.videojuegoRepository.findById(id);
             if (!estudioVideojuego.isEmpty()) {
@@ -69,7 +69,7 @@ public class VideojuegoService implements BaseService<Videojuego> {
 
     @Override
     @Transactional
-    public Videojuego updateOne(Videojuego entity, Long id) throws Exception {
+    public Videojuego updateOne(Videojuego entity, long id) throws Exception {
         try{
             Optional<Videojuego> estudioVideojuego = this.videojuegoRepository.findById(id);
                 Videojuego videojuego = estudioVideojuego.get();
@@ -81,7 +81,7 @@ public class VideojuegoService implements BaseService<Videojuego> {
     }
 
     @Transactional
-    public Videojuego findByIdAndActivo(Long id) throws Exception{
+    public Videojuego findByIdAndActivo(long id) throws Exception{
         try{
             Optional<Videojuego> optionalVideojuego = this.videojuegoRepository.findByIdAndActivo(id);
             return optionalVideojuego.get();
