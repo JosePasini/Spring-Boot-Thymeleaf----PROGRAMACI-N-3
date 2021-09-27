@@ -77,20 +77,13 @@ public class ControladorVideojuego {
     @GetMapping("/formulario/videojuego/{id}")
     public String formularioVideojuego(Model model, @PathVariable("id") long id){
         try{
-            System.out.println("Entrando a: /formulario/videojuego/ " + (id)+ ". ");
             model.addAttribute("categorias", this.categoriaService.findAll());
             model.addAttribute("estudios", this.estudioService.findAll());
-
-
-            System.out.println("Antes: ********* {"+ (id) +"} *************");
             if (id == 0){
                 model.addAttribute("videojuegos", new Videojuego());
-                System.out.println("Después: ********* {"+ (id) +"} *************");
-                System.out.println("New videojuego: ********* {"+ (new Videojuego().getId()) +"} *************");
             } else {
                 model.addAttribute("videojuegos", this.videojuegoService.findById(id));
             }
-            System.out.println("Saliendo del método formularioVieojuego.");
             return "views/formulario/videojuego";
         } catch (Exception e){
             model.addAttribute("error", "ERROR ERROR ERROR");
@@ -100,18 +93,12 @@ public class ControladorVideojuego {
 
     @PostMapping ("/formulario/videojuego/{id}")
     public String guardarVideojuego(@ModelAttribute("videojuegos") Videojuego videojuego, Model model, @PathVariable("id") long id){
-        System.out.println("######## entrando al método que NO funciona. ########");
-        System.out.println("######## {ID}: " + (id) + " ########");
         try{
             if (id == 0){
-                System.out.println("######## Id == 0  ########  guarda un nuevo videojuego. ########");
                 this.videojuegoService.saveOne(videojuego);
-            } else if (id != 0){
-                System.out.println("######## Id != 0  ########  actualiza un videojuego existente. ########");
+            } else {
                 this.videojuegoService.updateOne(videojuego,id);
-
             }
-            System.out.println("######## Sale del método que no funciona. ########");
             return "redirect:/crud";
         } catch (Exception e){
             model.addAttribute("error", "ERROR ERROR ERROR");
@@ -119,19 +106,38 @@ public class ControladorVideojuego {
         }
     }
 
+    @GetMapping("/eliminar/videojuego/{id}")
+    public String eliminarVideojuego(Model model, @PathVariable("id") long id){
+        try{
+            model.addAttribute("videojuegos" , this.videojuegoService.findById(id));
+            return "views/formulario/eliminar";
+        } catch (Exception e){
+            model.addAttribute("error", "ERROR ERROR ERROR");
+            return "error";
+        }
+    }
+
+    @PostMapping("/eliminar/videojuego/{id}")
+    public String desactivarVideojuego(Model model, @PathVariable("id") long id){
+        try{
+            this.videojuegoService.deleteById(id);
+            return "redirect:/crud";
+        } catch (Exception e){
+            model.addAttribute("error", "ERROR ERROR ERROR");
+            return "error";
+        }
+    }
+
+
 // ###########################################################################################
 // #####                    Métodos con Postman                                         ######
 // ###########################################################################################
     @PostMapping ("/create-update/videojuego/postman/{id}")
     public ResponseEntity<?> guardarVideojuegoPostman(@RequestBody Videojuego videojuego, @PathVariable("id") long id){
         try{
-            System.out.println("Guardando desde postman");
-            System.out.println("ID: " + (id));
             if (id == 0){
-                System.out.println("ID == 0: " + (id));
                 this.videojuegoService.saveOne(videojuego);
             } else {
-                System.out.println("ID != 0: " + (id));
                 this.videojuegoService.updateOne(videojuego,id);
             }
             return ResponseEntity.status(HttpStatus.OK).body(videojuego);
