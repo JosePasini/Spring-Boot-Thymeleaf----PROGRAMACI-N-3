@@ -4,17 +4,17 @@ import com.example.videojuegos.entities.Videojuego;
 import com.example.videojuegos.services.CategoriaService;
 import com.example.videojuegos.services.EstudioService;
 import com.example.videojuegos.services.VideojuegoService;
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.validation.Valid;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -100,10 +100,17 @@ public class ControladorVideojuego {
     @PostMapping ("/formulario/videojuego/{id}")
     public String guardarVideojuego(
             @RequestParam("archivo") MultipartFile archivo,
-            @ModelAttribute("videojuegos") Videojuego videojuego,
+            @Valid @ModelAttribute("videojuegos") Videojuego videojuego,
+            BindingResult result,
             Model model, @PathVariable("id") long id){
 
         try{
+            model.addAttribute("categorias", this.categoriaService.findAll());
+            model.addAttribute("estudios", this.estudioService.findAll());
+            if (result.hasErrors()){
+                return "views/formulario/videojuego";
+            }
+
             // Acá comienza la carga de las imágenes
             // Luego tengo que eliminar los Souts y dejarlo más limpio
             // Tembién hay que ver qué ruta dejar.
@@ -117,17 +124,30 @@ public class ControladorVideojuego {
             Path rutaAbsoluta = id != 0 ? Paths.get(ruta + "//" + videojuego.getRuta_img()) : Paths.get(ruta + "//"+nombreFoto);
             System.out.println("Path (ruta absoluta): " + rutaAbsoluta);
             if (id == 0){
-                Files.write(rutaAbsoluta, archivo.getBytes());
-                videojuego.setRuta_img(nombreFoto); // Este sería el original
-                System.out.println(" ************ GetBytes: " + archivo.getBytes());
-                videojuego.setRuta_img(rutaAbsoluta.toString()); // Esto sería lo que inventé yo.
-                this.videojuegoService.saveOne(videojuego);
 
+                //Verifico imagen vacía
+                if (archivo.isEmpty()){
+                    model.addAttribute("imageErrorMsg", "La imagen es requerida");
+                    return "views/formulario/videojuego";
+                }
+                //Verifico extensión de imagen
+                if (!this.validarExtension(archivo)){
+                    model.addAttribute("imageErrorMsg", "La extensión no es válida");
+                    return "views/formulario/videojuego";
+                }
+                //Verifico peso de la imagen
+                if (archivo.getSize() >= 15000000){
+                    model.addAttribute("imageErrorMsg", "Excede lo permitido (15 MB)");
+                    return "views/formulario/videojuego";
+                }
+                Files.write(rutaAbsoluta, archivo.getBytes());
+                videojuego.setRuta_img(nombreFoto);
+                this.videojuegoService.saveOne(videojuego);
             } else {
                 if (!archivo.isEmpty()){
                     Files.write(rutaAbsoluta, archivo.getBytes());
+                    this.videojuegoService.updateOne(videojuego,id);
                 }
-                this.videojuegoService.updateOne(videojuego,id);
             }
             return "redirect:/crud";
         } catch (Exception e){
@@ -155,6 +175,16 @@ public class ControladorVideojuego {
         } catch (Exception e){
             model.addAttribute("error", "ERROR ERROR ERROR");
             return "error";
+        }
+    }
+
+    public boolean validarExtension(MultipartFile archivo) throws Exception{
+        try{
+            ImageIO.read(archivo.getInputStream()).toString();
+            return true;
+        }catch (Exception e){
+            System.out.println("Error en imagen: " + e);
+            return false;
         }
     }
 
