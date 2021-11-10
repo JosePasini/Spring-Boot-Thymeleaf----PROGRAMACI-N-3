@@ -1,4 +1,6 @@
-# Spring-Boot-Thymeleaf----PROGRAMACION-3
+# Readme consta de 2 partes.
+# En la primer parte mostramos la página.
+# En la segunda parte mostramos como usar el código
 Primer proyecto utilizando Thymeleaf.
 
 PASO UNO: Configurar el archivo "properties":
