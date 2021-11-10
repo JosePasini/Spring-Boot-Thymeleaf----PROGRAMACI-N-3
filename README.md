@@ -1,3 +1,6 @@
+# Vista Previa:
+![image](https://user-images.githubusercontent.com/65823769/141190401-3f81a202-64d5-4dce-9864-3862551ba80c.png)
+
 # Readme consta de 2 partes.
 # En la primer parte mostramos la página.
 # En la segunda parte mostramos como usar el código
