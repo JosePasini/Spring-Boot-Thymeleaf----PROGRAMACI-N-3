@@ -14,8 +14,9 @@
 
 ![web3](https://user-images.githubusercontent.com/65823769/141187799-60142333-439f-4d29-8e25-9d836baea766.png)
 
-Acá se logra ver como se puede utilizar la query
+# Utilizando Querys de Búsqueda.
 ![web4](https://user-images.githubusercontent.com/65823769/141187806-5543e7ea-2d6a-4ba8-865e-ceef9663f410.png)
+
 ![web5](https://user-images.githubusercontent.com/65823769/141187812-e42170b8-718d-4cf5-98ca-5a310c838e8b.png)
 
 
