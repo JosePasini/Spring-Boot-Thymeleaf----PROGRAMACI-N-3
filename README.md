@@ -3,6 +3,7 @@
 # En la segunda parte mostramos como usar el código
 # ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~
 # PARTE I:
+# Mostrando la web.
 
 ![web0](https://user-images.githubusercontent.com/65823769/141187718-2bfcca3b-4d3a-4105-8d34-7a111e92df41.png)
 
@@ -23,6 +24,8 @@
 
 # ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~ ~~
 # PARTE II:
+
+# Configurando el código
 
 PASO UNO: Configurar el archivo "properties":
 ![step1](https://user-images.githubusercontent.com/65823769/141183053-3ea943c1-e006-41c5-890b-63585dd59877.png)
