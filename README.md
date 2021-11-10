@@ -5,10 +5,16 @@
 # PARTE I:
 
 ![web0](https://user-images.githubusercontent.com/65823769/141187718-2bfcca3b-4d3a-4105-8d34-7a111e92df41.png)
+
 ![web1](https://user-images.githubusercontent.com/65823769/141187765-007709ea-bf2e-4490-89ec-ec98c4a145eb.png)
+
 ![web2](https://user-images.githubusercontent.com/65823769/141187784-09da8322-1624-4c51-9b2f-0a3c481890a1.png)
+
 ![web2 1](https://user-images.githubusercontent.com/65823769/141187794-f09bb5b2-9149-4a92-be52-de08fc060998.png)
+
 ![web3](https://user-images.githubusercontent.com/65823769/141187799-60142333-439f-4d29-8e25-9d836baea766.png)
+
+Acá se logra ver como se puede utilizar la query
 ![web4](https://user-images.githubusercontent.com/65823769/141187806-5543e7ea-2d6a-4ba8-865e-ceef9663f410.png)
 ![web5](https://user-images.githubusercontent.com/65823769/141187812-e42170b8-718d-4cf5-98ca-5a310c838e8b.png)
 
